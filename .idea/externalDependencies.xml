@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalDependencies">
+    <plugin id="AngularJS" />
+    <plugin id="JavaScript" />
+    <plugin id="com.deadlock.scsyntax" />
+    <plugin id="dev.blachut.svelte.lang" />
+    <plugin id="org.intellij.plugins.postcss" />
+    <plugin id="org.jetbrains.plugins.astro" />
+    <plugin id="org.jetbrains.plugins.less" />
+    <plugin id="org.jetbrains.plugins.sass" />
+    <plugin id="org.jetbrains.plugins.vue" />
+  </component>
+</project>
