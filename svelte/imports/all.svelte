@@ -1,57 +1,66 @@
-<!-- copied cases from SvelteCreateImportTest -->
 <script>
-    |import {exported} from "./utils";|
-</script>
-<script>
-    |import {
-        A,
-        B,
-    } from "./utils";|
-</script>
-<script>
-    |import {exported} from "./utils";|
+// Vue.js file using JavaScript/ES6:
+// Default import
+// Named imports
+// Importing everything as an object
+// Aliased imports
+// Dynamic imports
+// Multiline imports
+// Imports in the middle of the code (although it is good practice to have all imports at the top of your file)
+// Async/await with dynamic imports
 
-    let existingVariable = 5;
-</script>
-<script>
-    import {exported} from "./utils";
-    |import {exported} from "./utils";|
+// Importing a default export
+≠import MyComponent from './MyComponent.vue';≠
 
-    let existingVariable = 5;
+// Importing a named export
+≠import {ComponentFunction} from './MyComponent.vue';≠
 
-    exported;
-</script>
-<script lang="ts">
-    |import {exported} from "./utils";|
+// Importing everything as an object
+≠import * as MyComponentAll from './MyComponent.vue';≠
 
-    let existingVariable = 5;
+// Importing with a alias
+≠import {ComponentFunction as CF} from './MyComponent.vue';≠
 
-    exported
-</script>
-<script context="module">
-    let existingVariable = 5;
-</script>
-<script>
-    |import {exported} from "./utils";|
-</script>
-<script context="module">
-    |import {exported} from "./utils";|
+// Dynamic Imports
+let MyComponent;
+import('./MyComponent.vue').then((module) => {
+  MyComponent = module.default || module;
+});
 
-    exported
+// Multiline import
+≠import {
+  ComponentFunctionOne,
+  ComponentFunctionTwo,
+  ComponentFunctionThree
+} from './MyComponent.vue';≠
+
+// Import in the middle of the code
+let myVariable = 'Some value';
+≠import MyComponentFromMiddle from './MyComponent.vue';≠
+
+// Using dynamic import in the middle of the code
+let MyComponent;
+someCondition && import('./MyComponent.vue').then((module) => {
+  MyComponent = module.default || module;
+});
+
+// Corner case: chaining .then() in dynamic import
+import('./MyComponent.vue').then((module) => {
+  return module.default || module;
+}).then((MyComponent) => {
+  // ...use MyComponent here...
+});
+
+// Corner case: async/await with dynamic import
+let MyComponent;
+
+async function getMyComponent() {
+  const module = await import('./MyComponent.vue');
+  MyComponent = module.default || module;
+}
+
+getMyComponent();
 </script>
-<script>
-    let existingVariable = 5;
-</script>
-<script>
-    |import Hello from "./Hello.svelte";|
-</script>
-<Hello />
-import Hello from "./Hello.svelte";
-export {Hello as RenamedHello};
-<script>
-  |import Hello, {something} from "./Hello.svelte";|
-</script>
-<Hello />
 {#each list as l}
     <script>
         |import Hello, {something} from "./Hello.svelte";|
