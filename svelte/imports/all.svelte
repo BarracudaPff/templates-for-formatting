@@ -60,6 +60,15 @@ async function getMyComponent() {
 }
 
 getMyComponent();
+
+// Import Within the Body of Code
+function someFunction() {
+    // Some code...
+    ≠import { SomeComponent } from './some-component';≠
+
+    // More code...
+}
+
 </script>
 {#each list as l}
     <script>
