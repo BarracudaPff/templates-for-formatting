@@ -1,0 +1,34 @@
+// Simple Import:
+≠@import 'partial';≠
+// Import from a specific path:
+≠@import '/path/to/css/file';≠
+// Import a CSS file from a node_modules package:
+≠@import 'packagename';≠
+// Combining import and customization:
+≠@import 'some-package' (customOption: value);≠
+// Import as a fallback list:
+≠@import 'default', 'fallback';≠
+// Multi-Line Imports:
+≠@import 'file1',
+        'file2',
+        'file3';≠
+// Imports in the middle of a code:
+body {
+  background: teal;
+}
+≠@import 'colors';≠
+// Overriding variables when importing a file:
+≠@import 'variables' (color: #f00);≠
+// Importing from a URL:
+≠@import url('http://website.com/remote.css');≠
+// Import with absolute and relative paths:
+≠@import '/path/to/css';≠ /* Absolute path */
+≠@import './path/to/css';≠ /* Relative path */
+// Glob import:
+≠@import 'buttons/**/*.css';≠
+// Import CSS from JavaScript files:
+≠import styles from './styles.css'≠
+// Import a specific section of a styles file:
+≠@import 'some-styles.css' :root;≠
+// Using require() for imports in some plugins:
+@value colors: require("./colors.js");

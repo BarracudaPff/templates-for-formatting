@@ -1,0 +1,52 @@
+// Basic Import
+@import "filename";  // filename.scss is imported from same directory
+@use "filename";
+// Importing from a Specific Folder
+@import "folder/filename";  // filename.scss is imported from specific folder in same directory
+@use "folder/filename";
+// Specifying an Extension
+@import "folder/filename.scss";  // Extension can also be specified.
+@use "folder/filename.scss";
+// Wildcard Imports
+@import "folder/*";  // Imports all .scss files in specified folder
+@use "folder/*";
+// Importing from a URL
+@import "http://path/to/file.scss";  // For importing a .scss file from a URL
+@use "http://path/to/file.scss";
+// Importing a Partial .scss File
+@import "another_folder/_filename";  // Importing a partial .scss file (starts with an underscore)
+@use "another_folder/_filename";
+// Multiline Imports
+@import
+  "file1",
+  "file2",
+  "file3";
+@use
+  "file1",
+  "file2",
+  "file3";
+// Imports in the Middle of Code
+$color-primary: #333;
+@import "variables";
+@use "variables";
+body { color: $color-primary; }
+// CSS File Import
+@import 'styles.css';
+@use 'styles.css';
+// Nesting Imports
+.container {
+  @import 'styles';
+  @use 'styles';
+}
+// Quote-less Imports
+@import url(./path/to/styles.scss);
+@use url(./path/to/styles.scss);
+// Importing from Directories Above
+@import "../../styles";
+@use "../../styles";
+// Importing from Installed Libraries
+@import "~library/styles";
+@use "~library/styles";
+// Importing with a wildcard
+@import "~library/styles" as *;
+@use "~library/styles" as *;
