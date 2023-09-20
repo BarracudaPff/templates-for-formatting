@@ -1,0 +1,39 @@
+<script>
+  // 1. Default Import:
+  ≠import myDefault from '../myModule';≠
+  // 2. Named Import:
+  ≠import {myThing1, myThing2} from '../myModule';≠
+  // 3. Import Everything:
+  ≠import * as myModuleBundle from '../myModule';≠
+  // 4. Dynamic Imports:
+  const module = await import('../myModule');
+  // 5. Astro.fetchContent() function:
+  const { astro, headers } = Astro;
+  let posts = Astro.fetchContent('../posts/*.md');
+  // 6. Multiline Imports:
+  ≠import {
+    functionOne,
+    functionTwo,
+    functionThree
+  } from '../myModule';≠
+  // 7. Imports in Middle of Code:
+  function someFunc() {
+    // some code
+  }
+
+  ≠import { myFunc } from '../myModule';≠
+
+  someFunc();
+  myFunc();
+  // 8. Import Components:
+  ≠import MyComponent from './MyComponent.astro';≠
+  // 9. Relative and Absolute Imports:
+  ≠import { myFunc } from 'components/myModule';≠ // assuming 'components' is the root directory
+  // 10. Re-exporting:
+  ≠export { default as myFunction } from './myModule';≠
+  // 11. Import type or Import interface (TypeScript):
+  ≠import type { MyType } from './myModule';≠
+  ≠import { MyInterface } from './myModule';≠
+  // 12. Import and Export at the same time:
+  ≠export { default as myDefault, myFunction } from './myModule';≠
+</script>
