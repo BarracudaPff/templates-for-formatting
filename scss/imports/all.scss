@@ -21,10 +21,7 @@
   "file1",
   "file2",
   "file3";≠
-≠@use
-  "file1",
-  "file2",
-  "file3";≠
+≠@import "file1", "file2";≠
 // Imports in the Middle of Code
 $color-primary: #333;
 ≠@import "variables";≠
@@ -40,7 +37,6 @@ body { color: $color-primary; }
 }
 // Quote-less Imports
 ≠@import url(./path/to/styles.scss);≠
-≠@use url(./path/to/styles.scss);≠
 // Importing from Directories Above
 ≠@import "../../styles";≠
 ≠@use "../../styles";≠
@@ -48,5 +44,23 @@ body { color: $color-primary; }
 ≠@import "~library/styles";≠
 ≠@use "~library/styles";≠
 // Importing with a wildcard
-≠@import "~library/styles" as *;≠
 ≠@use "~library/styles" as *;≠
+// Import with configuration
+@use 'library' with (
+  $black: #222,
+  $border-radius: 0.1rem
+);
+// Cases with forward
+≠@forward "src/list";≠
+≠@forward "src/list" as list-*;≠
+≠@forward "src/list" hide list-reset, $horizontal-list-gap;≠
+@forward 'library' with (
+  $black: #222,
+  $border-radius: 0.1rem
+);
+
+//We should also catch cases like below, but PSI can't parse it, although it's valid https://sass-lang.com/documentation/at-rules/forward/#configuring-modules
+//@forward 'library' with (
+//  $black: #222 !default,
+//  $border-radius: 0.1rem !default
+//);

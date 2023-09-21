@@ -1,15 +1,6 @@
 ---
-// Component Imports
 import Tour from '../components/Tour.astro';
-// You can import components from any supported Framework here!
-/* ASTRO:COMPONENT_IMPORTS */
-// Component Script:
-// You can write any JavaScript/TypeScript that you'd like here.
-// It will run during the build, but never in the browser.
-// All variables are available to use in the HTML template below.
 let title = 'My Astro Site';
-// Full Astro Component Syntax:
-// https://github.com/withastro/astro/blob/main/docs/core-concepts/astro-components.md
 ---
 <html lang="en">
 <head>
@@ -37,15 +28,6 @@ max-width: min(100%, 68ch);
 </div>
 </header>
 <Tour client:load />
-<!--
-- You can also use imported framework components directly in your markup!
--
-- Note: by default, these components are NOT interactive on the client.
-- The `:visible` directive tells Astro to make it interactive.
--
-- See https://github.com/withastro/astro/blob/main/docs/core-concepts/component-hydration.md
--->
-<!-- ASTRO:COMPONENT_MARKUP -->
 </main>
 </body>
 </html>

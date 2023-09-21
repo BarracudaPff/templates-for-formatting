@@ -1,0 +1,51 @@
+@mixin component($name)
+$component: $name !global
+.#{$name}
+@content
++component-styles($name)
+@mixin sub-component($name)
+$sub-component: "#{$component}-#{$name}" !global
+&-#{$name}
+@content
++sub-component-styles($name)
+@mixin extend($modifier: null)
+@if $modifier
+@extend .#{$component}-#{$modifier} !optional
+@else
+@extend .#{$component} !optional
+@mixin component-styles($modifier)
+$component-styles: map-get($components, $component)
+@if $component-styles
+@each $property, $value in $component-styles
+@if type-of($value) != map
+#{$property}: $value
+@mixin sub-component-styles($modifier)
+$component-styles: map-get($components, $component)
+@if $component-styles
+@each $property, $value in map-get($component-styles, $modifier)
+#{$property}: $value
+@mixin when($classes: null, $state: null, $not: null, $and: null)
++handle-states($component, $classes, $state, $not, $and)
+@content
+@mixin when-sub-state($class)
++prepend-to-root(".#{$component}-#{$class}")
+@content
+@mixin sub-state($classes: null, $state: null, $not: null, $and: null)
++handle-states($sub-component, $classes, $state, $not, $and)
+@content
+@mixin handle-states($component-name, $classes: null, $state: null, $not: null, $and: null)
+@if $classes
+$classes: selector-append(".#{$component-name}-", $classes)
+@if $state
+$classes: selector-append(".#{$component-name}", ":#{$state}")
+@if $not
+$not: selector-append(".#{$component-name}-", $not)
+$classes: selector-append($classes, ":not(#{$not})")
+@if $and
+$and: selector-append(".#{$component-name}-", $and)
+$classes: selector-append($classes, $and)
+@at-root #{selector-nest($classes, &)}
+@content
+@mixin and($class)
+@at-root #{selector-append(".#{$component}-#{$class}", &)}
+@content

@@ -1,0 +1,80 @@
+@use 'config';
+@use 'functions';
+@mixin screen-above($breakpoint) {
+@if not map-has-key($map: config.$breakpoints, $key: $breakpoint) {
+@error 'The given breakpoint #{$breakpoint} for @screen-above does not exist.';
+}
+@media screen and (min-width: map-get(config.$breakpoints, $breakpoint)) {
+@content;
+}
+}
+@mixin screen-between($lower, $higher) {
+@if not map-has-key($map: config.$breakpoints, $key: $lower) {
+@error 'The given breakpoint #{$lower} ($lower) for @screen-between does not exist.';
+}
+@if not map-has-key($map: config.$breakpoints, $key: $higher) {
+@error 'The given breakpoint #{$higher} ($higher) for @screen-between does not exist.';
+}
+@media screen and (min-width: map-get(config.$breakpoints, $lower)) and (max-width: map-get(config.$breakpoints, $higher) - 1) {
+@content;
+}
+}
+@mixin screen-below($breakpoint) {
+@if not map-has-key($map: config.$breakpoints, $key: $breakpoint) {
+@error 'The given breakpoint #{$breakpoint} for @screen-below does not exist.';
+}
+@media screen and (max-width: map-get(config.$breakpoints, $breakpoint) - 1) {
+@content;
+}
+}
+@mixin generate-classes-for-viewport(
+$classes,
+$property,
+$prefix: 'u-',
+$generate-viewports: 'true',
+$include-important: 'true'
+) {
+$mapping: functions.to-property-map($classes);
+@include generate-classes-for-viewport-with-map(
+$mapping,
+$property,
+$prefix,
+$generate-viewports,
+$include-important
+);
+}
+@mixin generate-classes-for-viewport-with-map(
+$class-value-pairs,
+$property,
+$prefix: 'u-',
+$generate-viewports: 'true',
+$include-important: 'true'
+) {
+$important: if($include-important == 'true', '!important', '');
+@each $class, $value in $class-value-pairs {
+.#{$prefix}#{$class} {
+#{$property}: $value#{$important};
+}
+}
+@if $generate-viewports == 'true' {
+@each $suffix, $limit in config.$breakpoint-pairs {
+@each $class, $value in $class-value-pairs {
+@include screen-above($limit) {
+.#{$prefix}#{$class}-#{$suffix} {
+#{$property}: $value#{$important};
+}
+}
+}
+}
+}
+}
+@mixin generate-styles-with-viewports($generate-viewports: 'true') {
+@content ('');
+@if $generate-viewports == 'true' {
+@each $suffix, $limit in config.$breakpoint-pairs {
+@include screen-above($limit) {
+@content ($suffix);
+}
+}
+}
+}

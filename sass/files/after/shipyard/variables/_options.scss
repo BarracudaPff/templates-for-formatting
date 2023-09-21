@@ -1,0 +1,280 @@
+$shipyard-defaults: (
+color: (
+prefix: null,
+responsive: false,
+values: $shipyard-colors
+),
+background-color: (
+prefix: 'bg',
+responsive: false,
+values: $shipyard-colors
+),
+box-shadow: (
+prefix: 'box-shadow',
+responsive: false,
+values: (
+'': 0 1px 2px rgba($gray-darkest, .08),
+'none': none,
+'hover': 0 0 4px 1px rgba($blue, .5),
+'active': 0 0 4px 1px rgba($green, .75)
+)
+),
+breakpoints: (
+sm: 576px,
+md: 768px,
+lg: 992px,
+xl: 1200px
+),
+margins: (
+all: 10px,
+sm: 20px,
+md: 30px,
+lg: 30px,
+xl: 40px
+),
+grid: (
+prefix: 'col',
+responsive: true,
+values: (0, 5, 10, 15, 20, 25, 30, 33, 35, 40, 45, 50, 55, 60, 65, 66, 70, 75, 80, 85, 90, 95, 100)
+),
+height: (
+prefix: 'h',
+responsive: true,
+values: (
+'50': 50px,
+'60': 60px,
+'70': 70px,
+'80': 80px,
+'90': 90px,
+'100': 100px
+)
+),
+width: (
+prefix: 'w',
+responsive: true,
+values: (
+'50': 50px,
+'60': 60px,
+'70': 70px,
+'80': 80px,
+'90': 90px,
+'100': 100px
+)
+),
+cursor: (
+prefix: 'cursor',
+responsive: false,
+values: (auto, pointer, default)
+),
+center: (
+prefix: 'center',
+responsive: true,
+values: ()
+),
+margin: (
+prefix: 'm',
+responsive: true,
+variants: (t: top, b: bottom, l: left, r: right),
+values: (
+0: 0,
+5: 5px,
+10: 10px,
+15: 15px,
+20: 20px,
+30: 30px,
+40: 40px,
+auto: auto
+)
+),
+padding: (
+prefix: 'p',
+responsive: true,
+variants: (t: top, b: bottom, l: left, r: right),
+values: (
+0: 0,
+5: 5px,
+10: 10px,
+15: 15px,
+20: 20px,
+30: 30px,
+40: 40px
+)
+),
+display: (
+prefix: null,
+responsive: true,
+values: (
+'flex': flex,
+'block': block,
+'table': table,
+'inline': inline,
+'inline-block': inline-block,
+'hidden': none
+)
+),
+font-family: (
+prefix: null,
+responsive: false,
+values: (
+'sans-serif': $font-family,
+'monospace': $font-monospace
+)
+),
+font-size: (
+prefix: 'text',
+responsive: true,
+values: $font-sizes
+),
+font-style: (
+prefix: null,
+responsive: false,
+values: (italic)
+),
+font-weight: (
+prefix: null,
+responsive: true,
+values: (
+normal: normal,
+bold: bold
+)
+),
+white-space: (
+prefix: 'white-space',
+responsive: true,
+values: (normal, pre, pre-wrap, nowrap)
+),
+text-align: (
+prefix: 'align',
+responsive: true,
+values: (center, left, right)
+),
+text-decoration: (
+prefix: null,
+responsive: false,
+values: (
+'line-through': line-through,
+'underline': underline,
+'no-underline': none
+)
+),
+text-shadow: (
+prefix: 'text-shadow',
+responsive: false,
+values: (
+'': 0 1px 0 rgba(#000,.1),
+'sm': 0 1px 1px rgba(#000, .1)
+)
+),
+text-transform: (
+prefix: null,
+responsive: false,
+values: (uppercase, lowercase, capitalize)
+),
+float: (
+prefix: 'float',
+responsive: true,
+values: (none, left, right)
+),
+overflow: (
+prefix: 'overflow',
+responsive: true,
+values: (auto, hidden, visible)
+),
+overflow-x: (
+prefix: 'overflow-x',
+responsive: true,
+values: (scroll: auto)
+),
+overflow-y: (
+prefix: 'overflow-y',
+responsive: true,
+values: (scroll: auto)
+),
+flex-direction: (
+prefix: 'flex',
+responsive: true,
+values: (
+'row': row,
+'row-reverse': row-reverse,
+'col': column,
+'col-reverse': column-reverse
+)
+),
+border-radius: (
+prefix: 'rounded',
+responsive: true,
+values: (
+'': 5px,
+'0': 0,
+'xs': 2px,
+'sm': 3px,
+'md': 5px,
+'pill': 999px
+)
+),
+opacity: (
+prefix: 'o',
+responsive: false,
+values: (
+'90': .9,
+'80': .8,
+'70': .7,
+'60': .6,
+'50': .5,
+'40': .4,
+'30': .3,
+'20': .2,
+'10': .1,
+'0': 0
+)
+),
+position: (
+prefix: null,
+responsive: true,
+values: (static, relative, absolute, fixed)
+),
+text-overflow: (
+prefix: null,
+responsive: true,
+values: (ellipsis, clip)
+),
+transition: (
+prefix: 'ease',
+responsive: false,
+values: (
+'150ms': all 150ms ease,
+'300ms': all 300ms ease,
+'600ms': all 600ms ease
+)
+),
+transform: (
+prefix: null,
+responsive: false,
+values: (
+rotate-45: rotate(45deg),
+rotate-90: rotate(90deg)
+)
+),
+visibility: (
+prefix: null,
+responsive: false,
+values: (
+'invisible': hidden,
+'visible': visible
+)
+),
+will-change: (
+prefix: 'will-change',
+responsive: false,
+values: (transform, opacity)
+),
+z-index: (
+prefix: 'z',
+responsive: false,
+values: (0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, auto)
+)
+);
+$shipyard-options: () !default;
+$shipyard-options: map-merge-options($shipyard-defaults, $shipyard-options);
+$margins: map-get($shipyard-options, margins);
+$breakpoints: map-get($shipyard-options, breakpoints);

@@ -1,0 +1,33 @@
+html {
+scrollbar-color: $scrollbar-thumb-color transparent;
+}
+* {
+scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+width: 6px;
+height: 6px;
+}
+::-webkit-scrollbar-thumb {
+border-radius: 3px;
+background-color: $scrollbar-thumb-color;
+}
+.mx_AutoHideScrollbar:hover {
+scrollbar-color: $scrollbar-thumb-color transparent;
+&::-webkit-scrollbar-thumb {
+background-color: $scrollbar-thumb-color;
+}
+}
+.mx_AutoHideScrollbar {
+overflow-x: hidden;
+overflow-y: auto;
+overflow-y: overlay;
+-ms-overflow-style: -ms-autohiding-scrollbar;
+&::-webkit-scrollbar {
+background-color: transparent;
+}
+&::-webkit-scrollbar-thumb {
+background-color: transparent;
+}
+scrollbar-color: transparent transparent;
+}

@@ -1,0 +1,103 @@
+@use 'sass:string';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass-true/sass/config/throw';
+@use 'sass-true/sass/true' as *;
+$DELIMETER: '-';
+@function hex-to-rgb($hex) {
+@return red($hex), green($hex), blue($hex);
+}
+@function delimitize($name) {
+@return $DELIMETER + $name + $DELIMETER;
+}
+@function string-split($string, $delimiter) {
+$result: ();
+$index: string.index($string, $delimiter);
+@while $index != null {
+$substring: string.slice($string, 1, $index - 1);
+$result: append($result, $substring);
+$string: string.slice($string, $index + string.length($delimiter));
+$index: string.index($string, $delimiter);
+}
+$result: append($result, $string);
+@return $result;
+}
+@function map-get-deep($map, $query) {
+$query-list: string-split($query, '.');
+$result: $map;
+@each $query in $query-list {
+$result: map-get-strict($result, $query);
+}
+@return $result;
+}
+@function map-get-strict($map, $key) {
+@if map-has-key($map, $key) {
+@return map-get($map, $key);
+} @else {
+@return throw.error(
+$message: 'ERROR: Specified key "#{$key}" does not exist in the mapping',
+$source: 'map-get-strict()',
+$catch: true
+);
+}
+}
+@function get-with-extend($all-config, $keys...) {
+$result: ();
+@if map.get($all-config, $keys...) != null {
+$result: map.deep-merge($result, map.get($all-config, $keys...));
+}
+@if map.get($all-config, extend, $keys...) != null {
+$result: map.deep-merge($result, map.get($all-config, extend, $keys...));
+}
+@return $result;
+}
+@function to-property-map($properties) {
+$result: ();
+@each $property in $properties {
+$result: map.set($result, $property, $property);
+}
+@return $result;
+}
+@function get-negative-value-map($map) {
+$result: ();
+@each $key, $value in $map {
+$to-add: (
+$key: $value,
+);
+@if type-of($value) == number and $key != 0 and strip-unit($value) != 0 {
+$to-add: map.merge($to-add, (n#{$key}: -#{$value}));
+}
+$result: map.merge($result, $to-add);
+}
+@return $result;
+}
+@function strip-unit($number) {
+@if type-of($number) == 'number' and not unitless($number) {
+@return math.div($number, ($number * 0 + 1));
+}
+@return $number;
+}
+@function map-multi-merge($maps...) {
+$result: ();
+@each $map in $maps {
+$result: map.merge($result, $map);
+}
+@return $result;
+}
+@function map-range($map, $start, $end) {
+$result: ();
+@each $key, $value in $map {
+@if type-of($key) == 'number' {
+@if $key >= $start and $key < $end {
+$result: map.merge(
+$result,
+(
+$key: $value,
+)
+);
+}
+}
+}
+@return $result;
+}

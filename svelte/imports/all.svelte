@@ -72,6 +72,6 @@ function someFunction() {
 </script>
 {#each list as l}
     <script>
-        |import Hello, {something} from "./Hello.svelte";|
+        ≠import Hello, {something} from "./Hello.svelte";≠
     </script>
 {/each}

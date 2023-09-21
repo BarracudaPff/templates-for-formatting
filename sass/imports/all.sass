@@ -1,30 +1,27 @@
 // Basic Import
-≠@import "filename"≠  // filename.sass is imported from same directory
+≠@import "filename"≠  // filename.scss is imported from same directory
 ≠@use "filename"≠
 // Importing from a Specific Folder
-≠@import "folder/filename"≠  // filename.sass is imported from specific folder in same directory
+≠@import "folder/filename"≠  // filename.scss is imported from specific folder in same directory
 ≠@use "folder/filename"≠
 // Specifying an Extension
-≠@import "folder/filename.sass"≠  // Extension can also be specified.
-≠@use "folder/filename.sass"≠
+≠@import "folder/filename.scss"≠  // Extension can also be specified.
+≠@use "folder/filename.scss"≠
 // Wildcard Imports
-≠@import "folder/*"≠  // Imports all .sass files in specified folder
+≠@import "folder/*"≠  // Imports all .scss files in specified folder
 ≠@use "folder/*"≠
 // Importing from a URL
-≠@import "http://path/to/file.sass"≠  // For importing a .sass file from a URL
-≠@use "http://path/to/file.sass"≠
-// Importing a Partial .sass File
-≠@import "another_folder/_filename"≠  // Importing a partial .sass file (starts with an underscore)
+≠@import "http://path/to/file.scss"≠  // For importing a .scss file from a URL
+≠@use "http://path/to/file.scss"≠
+// Importing a Partial .scss File
+≠@import "another_folder/_filename"≠  // Importing a partial .scss file (starts with an underscore)
 ≠@use "another_folder/_filename"≠
 // Multiline Imports
 ≠@import
   "file1",
   "file2",
   "file3"≠
-≠@use
-  "file1",
-  "file2",
-  "file3"≠
+≠@import "file1", "file2"≠
 // Imports in the Middle of Code
 $color-primary: #333
 ≠@import "variables"≠
@@ -39,8 +36,7 @@ body { color: $color-primary }
   ≠@use 'styles'≠
 }
 // Quote-less Imports
-≠@import url(./path/to/styles.sass)≠
-≠@use url(./path/to/styles.sass)≠
+≠@import url(./path/to/styles.scss)≠
 // Importing from Directories Above
 ≠@import "../../styles"≠
 ≠@use "../../styles"≠
@@ -48,5 +44,23 @@ body { color: $color-primary }
 ≠@import "~library/styles"≠
 ≠@use "~library/styles"≠
 // Importing with a wildcard
-≠@import "~library/styles" as *≠
 ≠@use "~library/styles" as *≠
+// Import with configuration
+@use 'library' with (
+  $black: #222,
+  $border-radius: 0.1rem
+)
+// Cases with forward
+≠@forward "src/list"≠
+≠@forward "src/list" as list-*≠
+≠@forward "src/list" hide list-reset, $horizontal-list-gap≠
+@forward 'library' with (
+  $black: #222,
+  $border-radius: 0.1rem
+)
+
+//We should also catch cases like below, but PSI can't parse it, although it's valid https://sass-lang.com/documentation/at-rules/forward/#configuring-modules
+//@forward 'library' with (
+//  $black: #222 !default,
+//  $border-radius: 0.1rem !default
+//)
